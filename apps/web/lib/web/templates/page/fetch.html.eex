@@ -1,0 +1,6 @@
+<%= for item <- @items do %>
+  <div>
+    <%= item.address.formatted %>
+    <small style="display: block;"><a href="<%= item.url %>"><%= item.url %></a></small>
+  </div>
+<% end %>

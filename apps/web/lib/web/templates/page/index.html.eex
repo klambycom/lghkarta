@@ -1,0 +1,37 @@
+<h2>Search</h2>
+<p>TODO</p>
+
+<h2>Result</h2>
+<div id="map" style="height: 400px; width: 100%;"></div>
+
+<h2>New apartments from today</h2>
+<p>TODO Show new apartments first.</p>
+<div id="apartments">
+  <%= for {apartment, index} <- Enum.with_index(@apartments) do %>
+    <div
+      class="apartment <%= if index >= 5 do %>older<% end %>"
+      data-id="<%= apartment.id %>"
+      data-longitude="<%= apartment.address.location.lng %>"
+      data-latitude="<%= apartment.address.location.lat %>"
+      data-city="<%= apartment.address.city %>"
+      data-title="<%= apartment.address.formatted %>"
+      data-url="<%= apartment.url %>"
+    >
+      <h3><%= apartment.address.formatted %></h3>
+      <p><a href="<%= apartment.url %>"><%= apartment.url %></a></p>
+      <ul class="facts">
+        <li data-type="rooms" data-value="<%= apartment.facts.rooms %>"><%= apartment.facts.rooms %> rooms</li>
+        <li data-type="area" data-value="<%= apartment.facts.area %>"><%= apartment.facts.area %> m2</li>
+        <li data-type="landlord" data-value="<%= apartment.facts.landlord %>"><%= apartment.facts.landlord %></li>
+        <li data-type="urban_area" data-value="<%= apartment.address.area1 %>"><%= apartment.address.area1 %></li>
+        <li data-type="available_date" data-value="<%= apartment.available_date %>">Available from <%= apartment.available_date %></li>
+        <li data-type="apply_before" data-value="<%= apartment.last_date %>">Apply before <%= apartment.last_date %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<a href="#" id="js-toggle-all-apartments" style="display: none;">Show all apartments</a>
+
+<script src="<%= static_path(@conn, "/js/page.js") %>"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBllBEclShJ1DvF38NPayViX51Ws9Snte8&callback=initMap"></script>
