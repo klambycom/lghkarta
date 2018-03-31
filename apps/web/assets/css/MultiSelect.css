@@ -1,0 +1,17 @@
+.MultiSelect .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MultiSelect button {
+  flex-grow: 1;
+  height: 40px;
+  background: white;
+  border: 1px solid #cccccc;
+  margin-right: 5px;
+}
+
+.MultiSelect button.selected {
+  background: #243c29;
+  color: white;
+}

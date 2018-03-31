@@ -1,0 +1,21 @@
+.Filter {
+  width: 70%;
+}
+
+.Filter>div {
+  margin-bottom: 40px;
+}
+
+.Filter .show-result {
+  border: 2px solid #243c29;
+  padding: 15px 30px;
+  font-size: 1em;
+  background: white;
+  color: #243c29;
+}
+
+.Filter .show-result span {
+  font-weight: lighter;
+  font-size: .8em;
+  margin-left: 10px;
+}

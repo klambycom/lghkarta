@@ -1,0 +1,13 @@
+.Range input {
+  width: 100%;
+  margin: 0;
+}
+
+.Range .label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Range .label .value {
+  color: #959595;
+}

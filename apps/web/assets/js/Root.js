@@ -1,38 +1,50 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import Map from "./Map";
+import Filter from "./Filter";
 
 class Root extends Component {
   constructor(props) {
     super(props);
-    this.state = {selectedId: null};
+
+    this.state = {
+      selectedId: null,
+      apartments: props.apartments
+    };
+
+    this.mapRef = React.createRef();
   }
 
-  handleOpenMarker(x) {
-    console.log(x);
-    this.setState({selectedId: x.id});
+  handleFilter(apartments) {
+    ReactDOM
+      .findDOMNode(this.mapRef.current)
+      .scrollIntoView({behavior: "smooth", block: "start"});
+
+    this.setState({apartments});
   }
 
   render() {
-    console.log(this.props);
-
     return (
       <div>
-        <div className="narrow">
-          <h2>Sök lediga lägenheter</h2>
-          <p>TODO</p>
+        <div className="Header">
+          <div>
+            <header>
+              <h1>Hitta lediga lägenheter i Malmö</h1>
+            </header>
+            <Filter apartments={this.props.apartments} onSubmit={apartments => this.handleFilter(apartments)} />
+          </div>
+          <img src="/images/image.png" alt="Karta och Turning torso" />
         </div>
 
-        <div className="narrow">
-          <h2>Resultat</h2>
-        </div>
         <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `800px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-          apartments={this.props.apartments}
-          onClick={x => this.handleOpenMarker(x)}
+          apartments={this.state.apartments}
+          onClick={x => this.setState({selectedId: x.id})}
           selectedId={this.state.selectedId}
+          ref={this.mapRef}
         />
       </div>
     );

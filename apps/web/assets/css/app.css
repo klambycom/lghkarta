@@ -17,3 +17,20 @@ a:hover {
   max-width: 800px;
   margin: 0 auto;
 }
+
+#alerts {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  top: 20px;
+}
+
+#alerts .alert.alert-info {
+  background: #fff300;
+  display: inline-block;
+}
+
+#alerts .alert.alert-danger {
+  background: #ff7171;
+  display: inline-block;
+}

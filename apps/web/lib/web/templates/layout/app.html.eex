@@ -11,13 +11,9 @@
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body>
+  <body style="margin: 0;">
     <div class="container">
-      <header class="narrow">
-        <h1 style="text-align: center; font-size: 8em;">🏬📍🗺️</h1>
-      </header>
-
-      <div class="narrow">
+      <div id="alerts">
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       </div>

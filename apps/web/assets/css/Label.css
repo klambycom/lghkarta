@@ -1,0 +1,8 @@
+.Label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Label .value {
+  color: #959595;
+}
