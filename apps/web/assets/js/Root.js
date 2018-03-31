@@ -27,13 +27,15 @@ class Root extends Component {
     return (
       <div>
         <div className="Header">
-          <div>
-            <header>
-              <h1>Hitta lediga lägenheter i Malmö</h1>
-            </header>
-            <Filter apartments={this.props.apartments} onSubmit={apartments => this.handleFilter(apartments)} />
+          <div className="container">
+            <div>
+              <header>
+                <h1>Hitta lediga lägenheter i Malmö</h1>
+              </header>
+              <Filter apartments={this.props.apartments} onSubmit={apartments => this.handleFilter(apartments)} />
+            </div>
+            <img src="/images/image.png" alt="Karta och Turning torso" />
           </div>
-          <img src="/images/image.png" alt="Karta och Turning torso" />
         </div>
 
         <Map
