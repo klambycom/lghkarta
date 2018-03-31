@@ -1,1 +1,19 @@
 /* This file is for your main application css. */
+
+body {
+  font-family: sans-serif;
+}
+
+a {
+  color: #1C5D99;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.narrow {
+  max-width: 800px;
+  margin: 0 auto;
+}

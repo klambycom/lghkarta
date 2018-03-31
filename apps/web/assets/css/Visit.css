@@ -1,0 +1,18 @@
+.Visit {
+  background: #243C29;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.Visit p {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.Visit small {
+  font-size: .8em;
+}
