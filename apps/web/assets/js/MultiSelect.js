@@ -1,4 +1,5 @@
 import React from "react";
+import Label from "./Label";
 
 const MultiSelect = (props) => {
   const options = props.rooms.map(x => {
@@ -8,7 +9,7 @@ const MultiSelect = (props) => {
 
   return (
     <div className="MultiSelect">
-      <div className="label">{props.label}</div>
+      <Label label={props.label} value={props.selected} formatter={props.formatter} />
       <div className="buttons">
         {options.map((x, i) => (
           <button

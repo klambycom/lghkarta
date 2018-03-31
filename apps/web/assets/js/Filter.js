@@ -22,8 +22,43 @@ const formatter = {
     }
 
     return `${value} kr`;
+  },
+
+  rooms(values, max_value, max_length) {
+    if (values.length === 0 || values.length === max_length) {
+      return "1-8, eller fler";
+    }
+
+    // Group values
+    let result = values
+      .reduce((acc, x) => {
+        if (acc.previous - x < -1) {
+          acc.parts.push([x]);
+        }
+        else {
+          acc.parts[acc.parts.length - 1].push(x);
+        }
+
+        return {parts: acc.parts, previous: x};
+      }, {parts: [[]], previous: 0})
+
+    // Convert parts to string
+    let text = result
+      .parts
+      .filter(x => x.length > 0)
+      .map(x => {
+        if (x.length === 1) { return x[0]; }
+        return `${x[0]}-${x[x.length - 1]}`;
+      })
+      .join(", ");
+
+    if (values[values.length - 1] === max_value) {
+      text += ", eller fler";
+    }
+
+    return text;
   }
-}
+};
 
 class Filter extends Component {
   constructor(props) {
@@ -47,6 +82,7 @@ class Filter extends Component {
           min={1000}
           max={MAX_RENT}
           step={500}
+          value={this.state.rent}
           formatter={x => formatter.rent(x, MAX_RENT)}
           onChange={rent => this.setState({rent})}
         />
@@ -63,6 +99,7 @@ class Filter extends Component {
             {value: MAX_ROOMS, text: "8+"}
           ]}
           selected={this.state.rooms}
+          formatter={x => formatter.rooms(x, MAX_ROOMS, 8)}
           onChange={rooms => this.setState({rooms})}
         />
         <button

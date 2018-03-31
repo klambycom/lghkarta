@@ -8,6 +8,9 @@
   height: 40px;
   background: white;
   border: 1px solid #cccccc;
+}
+
+.MultiSelect button:not(:last-child) {
   margin-right: 5px;
 }
 
