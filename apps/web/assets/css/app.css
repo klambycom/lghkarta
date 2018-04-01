@@ -34,3 +34,9 @@ a:hover {
   background: #ff7171;
   display: inline-block;
 }
+
+footer {
+  background: #ececec;
+  margin-top: 50px;
+  padding: 30px;
+}
