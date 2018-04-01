@@ -17,3 +17,17 @@
   font-size: 5em;
   color: #243c29;
 }
+
+.Header .filter {
+  flex-grow: 1;
+}
+
+.Header .image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header .image img {
+  width: 100%;
+}
