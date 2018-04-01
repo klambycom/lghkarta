@@ -17,11 +17,17 @@ defmodule Crawler.Geocoding do
       build_url(address)
       |> HTTPoison.get!
 
-    %{"results" => [result | _]} = Poison.decode!(html)
-
-    result["address_components"] |> Enum.reduce(%__MODULE__{}, &component/2)
-    |> Map.put(:location, %{lat: result["geometry"]["location"]["lat"], lng: result["geometry"]["location"]["lng"]})
-    |> Map.put(:formatted, result["formatted_address"])
+    case Poison.decode!(html) do
+      %{"results" => [result | _]} ->
+        result["address_components"]
+        |> Enum.reduce(%__MODULE__{}, &component/2)
+        |> Map.put(:location, %{lat: result["geometry"]["location"]["lat"], lng: result["geometry"]["location"]["lng"]})
+        |> Map.put(:formatted, result["formatted_address"])
+      %{"results" => [], "status" => "ZERO_RESULTS"} ->
+        %__MODULE__{}
+      x ->
+        throw(x)
+    end
   end
 
   defp build_url(address) do
