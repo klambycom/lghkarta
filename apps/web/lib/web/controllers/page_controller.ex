@@ -2,7 +2,11 @@ defmodule Web.PageController do
   use Web, :controller
 
   def index(conn, _params) do
-    render conn, "index.html", apartments: Apartment.all, test: List.first(Apartment.all)
+    render(
+      conn,
+      "index.html",
+      apartments: Apartment.all |> Enum.filter(fn x -> not is_nil(x.address.location) end)
+    )
   end
 
   def fetch(conn, _params) do
@@ -19,8 +23,13 @@ defmodule Web.PageController do
 
     render conn, "fetch.html", items: items
   end
+  defp crawl_item(item) do
+    # Google Maps Geolocation API only allows 50 requests per second. Add
+    # a short sleep to not send too many requests.
+    Process.sleep(50)
 
-  defp crawl_item(item), do: item |> Crawler.fetch_location |> Crawler.fetch_page
+    item |> Crawler.fetch_location |> Crawler.fetch_page
+  end
 
   defp create_apartment(item) do
     %Apartment{
@@ -43,6 +52,7 @@ defmodule Web.PageController do
       },
       facts: %Apartment.Facts{
         area: item.area,
+        rent: item.rent,
         balcony: item.balcony,
         balcony_direction: item.balcony_direction,
         bathtub: item.bathtub,

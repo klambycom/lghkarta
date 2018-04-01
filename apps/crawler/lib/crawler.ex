@@ -42,6 +42,7 @@ defmodule Crawler do
     Item.new("https://www.boplatssyd.se#{path}")
     |> Map.put(:rooms, find_attr(item, ".size-designation.rooms", "data-apartment-rooms") |> String.to_integer)
     |> Map.put(:area, find_attr(item, ".square-area.size-kvm.size", "data-apartment-size") |> String.to_integer)
+    |> Map.put(:rent, find_attr(item, ".total-rent.rent", "data-apartment-rent") |> String.to_integer)
     |> Map.put(:landlord, find_attr(item, ".host-name.landlord", "data-apartment-landlord"))
     |> Map.put(:available, find_attr(item, ".available-date.available", "data-apartment-available") |> Timex.parse!("{ISO:Extended}"))
     |> Map.put(:address, %{

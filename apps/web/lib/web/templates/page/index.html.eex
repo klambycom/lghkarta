@@ -13,6 +13,7 @@
         data-city="<%= apartment.address.city %>"
         data-title="<%= apartment.address.formatted %>"
         data-url="<%= apartment.url %>"
+        data-rent="<%= apartment.facts.rent %>"
       >
         <h3><%= apartment.address.formatted %></h3>
         <p><a href="<%= apartment.url %>"><%= apartment.url %></a></p>

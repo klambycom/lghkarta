@@ -1,5 +1,6 @@
 defmodule Apartment.Facts do
   defstruct area: nil,
+            rent: nil,
             balcony: nil,
             balcony_direction: nil,
             bathtub: nil,

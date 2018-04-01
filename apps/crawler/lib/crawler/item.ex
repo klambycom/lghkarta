@@ -4,6 +4,7 @@ defmodule Crawler.Item do
   defstruct id: nil,
             url: nil,
             rooms: nil,
+            rent: nil,
             area: nil,
             landlord: nil,
             available: nil,
