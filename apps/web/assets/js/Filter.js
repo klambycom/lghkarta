@@ -1,9 +1,9 @@
 import React, {Component} from "react";
+import formatter from "./formatter";
+import settings from "./settings";
 import MultiSelect from "./MultiSelect";
 import Range from "./Range";
-
-const MAX_RENT = 20000;
-const MAX_ROOMS = 8;
+import History from "./History";
 
 const check = {
   rooms(nr_of_rooms, selected) {
@@ -11,52 +11,7 @@ const check = {
 
     // Check if the apartment have the selected amount of rooms or more than max
     // if that is selected.
-    return (selected.includes(MAX_ROOMS) && nr_of_rooms > MAX_ROOMS) || selected.includes(nr_of_rooms);
-  }
-};
-
-const formatter = {
-  rent(value, max_value) {
-    if (max_value && value === max_value) {
-      return "Ingen gräns";
-    }
-
-    return `${value} kr`;
-  },
-
-  rooms(values, max_value, max_length) {
-    if (values.length === 0 || values.length === max_length) {
-      return "1-8, eller fler";
-    }
-
-    // Group values
-    let result = values
-      .reduce((acc, x) => {
-        if (acc.previous - x < -1) {
-          acc.parts.push([x]);
-        }
-        else {
-          acc.parts[acc.parts.length - 1].push(x);
-        }
-
-        return {parts: acc.parts, previous: x};
-      }, {parts: [[]], previous: 0})
-
-    // Convert parts to string
-    let text = result
-      .parts
-      .filter(x => x.length > 0)
-      .map(x => {
-        if (x.length === 1) { return x[0]; }
-        return `${x[0]}-${x[x.length - 1]}`;
-      })
-      .join(", ");
-
-    if (values[values.length - 1] === max_value) {
-      text += ", eller fler";
-    }
-
-    return text;
+    return (selected.includes(settings.rooms.MAX) && nr_of_rooms > settings.rooms.MAX) || selected.includes(nr_of_rooms);
   }
 };
 
@@ -65,9 +20,19 @@ class Filter extends Component {
     super(props);
 
     this.state = {
-      rent: MAX_RENT,
-      rooms: []
+      rent: settings.rent.MAX,
+      rooms: [],
+      history: []
     };
+  }
+
+  handleSubmit(apartments) {
+    if (this.state.rent < settings.rent.MAX || this.state.rooms.length > 0) {
+      const history = [{rent: this.state.rent, rooms: this.state.rooms}, ...this.state.history].slice(0, 3);
+      this.setState({history});
+    }
+
+    this.props.onSubmit(apartments);
   }
 
   render() {
@@ -79,33 +44,24 @@ class Filter extends Component {
         <h2>Filtrera</h2>
         <Range
           label="Maxhyra"
-          min={1000}
-          max={MAX_RENT}
-          step={500}
+          min={settings.rent.MIN}
+          max={settings.rent.MAX}
+          step={settings.rent.STEP}
           value={this.state.rent}
-          formatter={x => formatter.rent(x, MAX_RENT)}
+          formatter={x => formatter.rent(x, settings.rent.MAX)}
           onChange={rent => this.setState({rent})}
         />
         <MultiSelect
           label="Antal rum"
-          rooms={[
-            {value: 1, text: "1"},
-            {value: 2, text: "2"},
-            {value: 3, text: "3"},
-            {value: 4, text: "4"},
-            {value: 5, text: "5"},
-            {value: 6, text: "6"},
-            {value: 7, text: "7"},
-            {value: MAX_ROOMS, text: "8+"}
-          ]}
+          rooms={settings.rooms.VALUES}
           selected={this.state.rooms}
-          formatter={x => formatter.rooms(x, MAX_ROOMS, 8)}
+          formatter={x => formatter.rooms(x, settings.rooms.MAX, settings.rooms.VALUES)}
           onChange={rooms => this.setState({rooms})}
         />
-        <button
-          className="show-result"
-          onClick={() => this.props.onSubmit(apartments)}
-        >Se lägenheter <span>({apartments.length} st)</span></button>
+        <button className="show-result" onClick={() => this.handleSubmit(apartments)}>
+          Se lägenheter <span>({apartments.length} st)</span>
+        </button>
+        <History items={this.state.history} onClick={state => this.setState(state)} />
       </div>
     );
   }

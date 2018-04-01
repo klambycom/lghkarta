@@ -1,0 +1,15 @@
+.History {
+  margin-top: 30px;
+  background: #ededed;
+  padding: 20px;
+  padding-top: 10px;
+  line-height: 1.5em;
+}
+
+.History span {
+  display: block;
+}
+
+.History svg {
+  fill: #757575;
+}
