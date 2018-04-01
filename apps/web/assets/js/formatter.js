@@ -6,7 +6,9 @@ const formatter = {
       return "Ingen gräns";
     }
 
-    return `${value} kr`;
+    const value_with_spaces = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+    return `${value_with_spaces} kr`;
   },
 
   rooms(values) {
