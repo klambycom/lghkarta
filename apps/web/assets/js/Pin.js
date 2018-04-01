@@ -12,6 +12,7 @@ const Pin = (props) => {
           <h3>{props.title}</h3>
           <Facts
             rooms={props.facts.rooms}
+            rent={props.facts.rent}
             area={props.facts.area}
             landlord={props.facts.landlord}
             urban_area={props.facts.urban_area}
