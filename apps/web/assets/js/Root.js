@@ -43,7 +43,7 @@ class Root extends Component {
         <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `800px` }} />}
+          containerElement={<div style={{ height: `100vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           apartments={this.state.apartments}
           onClick={x => this.setState({selectedId: x.id})}
