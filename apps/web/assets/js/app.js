@@ -30,10 +30,14 @@ const createApartment = x => {
     return acc;
   }, {});
 
+  facts.area = +facts.area;
+  facts.rooms = +facts.rooms;
+  facts.rent = +x.dataset.rent;
+
   return {
     id: x.dataset.id,
-    longitude: x.dataset.longitude,
-    latitude: x.dataset.latitude,
+    longitude: +x.dataset.longitude,
+    latitude: +x.dataset.latitude,
     city: x.dataset.city,
     title: x.dataset.title,
     url: x.dataset.url,

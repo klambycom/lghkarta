@@ -12,6 +12,10 @@ const check = {
     // Check if the apartment have the selected amount of rooms or more than max
     // if that is selected.
     return (selected.includes(settings.rooms.MAX) && nr_of_rooms > settings.rooms.MAX) || selected.includes(nr_of_rooms);
+  },
+
+  rent(sum, selected_max) {
+    return selected_max === settings.rent.MAX || selected_max >= sum
   }
 };
 
@@ -37,7 +41,8 @@ class Filter extends Component {
 
   render() {
     const apartments = this.props.apartments
-      .filter(x => check.rooms(+x.facts.rooms, this.state.rooms));
+      .filter(x => check.rooms(+x.facts.rooms, this.state.rooms))
+      .filter(x => check.rent(+x.facts.rent, this.state.rent));
 
     return (
       <div className="Filter">
