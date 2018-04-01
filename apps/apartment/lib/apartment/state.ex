@@ -57,4 +57,29 @@ defmodule Apartment.State do
       %{id: 2}
   """
   def by_id(state, id), do: Map.get(state.items, id)
+
+  @doc """
+  Remove all expired ads.
+
+  # Example
+
+      iex> fresh_state =
+      iex>   %State{
+      ...>     items: %{
+      ...>       1 => %Apartment{id: 1, last_date: Timex.add(Timex.now, Timex.Duration.from_days(1))},
+      ...>       2 => %Apartment{id: 2, last_date: Timex.subtract(Timex.now, Timex.Duration.from_days(1))},
+      ...>       3 => %Apartment{id: 3, last_date: Timex.add(Timex.now, Timex.Duration.from_days(1))}
+      ...>     }
+      ...>   }
+      iex>   |> State.remove_expired
+      iex>
+      iex> length(Map.to_list(fresh_state.items))
+      2
+  """
+  def remove_expired(state),
+    do: %{state | items: filter(state.items, &Apartment.available?/1)}
+
+  defp filter(items, fun),
+    do: Enum.filter(items, fn {_id, apartment} -> fun.(apartment) end)
+        |> Enum.into(%{})
 end

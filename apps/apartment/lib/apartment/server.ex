@@ -19,6 +19,8 @@ defmodule Apartment.Server do
 
   def handle_call({:by_id, id}, _from, state), do: {:reply, Map.get(state.items, id), state}
 
-  # TODO Remove old apartments from state?
-  def handle_call(:all, _from, state), do: {:reply, Map.values(state.items), state}
+  def handle_call(:all, _from, state) do
+    new_state = State.remove_expired(state)
+    {:reply, Map.values(new_state.items), new_state}
+  end
 end

@@ -33,4 +33,23 @@ defmodule Apartment do
   Get all available apartments.
   """
   def all, do: GenServer.call(Server, :all)
+
+  @doc """
+  Check if it is still possible to apply to this apartment.
+
+  # Example
+
+  Last day to apply is one day in the past:
+
+      iex> %Apartment{last_date: Timex.subtract(Timex.now, Timex.Duration.from_days(1))}
+      iex> |> Apartment.available?
+      false
+
+  Last day to apply is one day in the future:
+
+      iex> %Apartment{last_date: Timex.add(Timex.now, Timex.Duration.from_days(1))}
+      iex> |> Apartment.available?
+      true
+  """
+  def available?(%__MODULE__{last_date: last_date}), do: Timex.before?(Timex.now, last_date)
 end
