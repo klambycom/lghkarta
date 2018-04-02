@@ -22,8 +22,8 @@
           <li data-type="area" data-value="<%= apartment.facts.area %>"><%= apartment.facts.area %> m2</li>
           <li data-type="landlord" data-value="<%= apartment.facts.landlord %>"><%= apartment.facts.landlord %></li>
           <li data-type="urban_area" data-value="<%= apartment.address.area1 %>"><%= apartment.address.area1 %></li>
-          <li data-type="available_date" data-value="<%= apartment.available_date %>">Available from <%= apartment.available_date %></li>
-          <li data-type="apply_before" data-value="<%= apartment.last_date %>">Apply before <%= apartment.last_date %></li>
+          <li data-type="available_date" data-value="<%= format(apartment.available_date) %>">Available from <%= apartment.available_date %></li>
+          <li data-type="apply_before" data-value="<%= format(apartment.last_date) %>">Apply before <%= apartment.last_date %></li>
         </ul>
       </div>
     <% end %>

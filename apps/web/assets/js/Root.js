@@ -9,7 +9,7 @@ class Root extends Component {
     super(props);
 
     this.state = {
-      selectedId: null,
+      selectedId: "7e330e84cfcf09a666f6d4749fd95a33",
       apartments: props.apartments
     };
 

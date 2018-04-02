@@ -3,6 +3,7 @@ import {Marker, InfoWindow} from "react-google-maps";
 import Visit from "./Visit";
 import Facts from "./Facts";
 import StreetImage from "./StreetImage";
+import DateTime from "./DateTime";
 
 const Pin = (props) => {
   return (
@@ -10,6 +11,10 @@ const Pin = (props) => {
       {props.isOpen && <InfoWindow>
         <div className="Pin-popup">
           <h3>{props.title}</h3>
+          <div className="dates">
+            <DateTime date={props.facts.available_date} format="Tillgänglig från den %d%:e %month% %year%" />
+            <DateTime date={props.facts.apply_before} format="Ansök senast den %d%:e %month% %hh%:%mm%" />
+          </div>
           <Facts
             rooms={props.facts.rooms}
             rent={props.facts.rent}

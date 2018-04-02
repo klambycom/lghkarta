@@ -34,6 +34,9 @@ const createApartment = x => {
   facts.rooms = +facts.rooms;
   facts.rent = +x.dataset.rent;
 
+  facts.available_date = new Date(facts.available_date);
+  facts.apply_before = new Date(facts.apply_before);
+
   return {
     id: x.dataset.id,
     longitude: +x.dataset.longitude,
