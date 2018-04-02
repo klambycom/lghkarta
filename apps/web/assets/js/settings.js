@@ -20,6 +20,11 @@ const settings = {
     MAX: ROOM_VALUES[ROOM_VALUES.length - 1].value,
     LENGTH: ROOM_VALUES.length,
     VALUES: ROOM_VALUES
+  },
+
+  google_maps: {
+    JS: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+    KEY: "AIzaSyDtTZTBMSoEnrum5YU9JszzbX-y6MemEWs"
   }
 };
 

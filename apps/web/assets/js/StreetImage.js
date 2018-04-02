@@ -1,4 +1,5 @@
 import React from "react";
+import settings from "./settings";
 
 const StreetImage = (props) => {
   const url = "https://maps.googleapis.com/maps/api/streetview";
@@ -6,7 +7,7 @@ const StreetImage = (props) => {
 
   return (
     <div>
-      <img src={`${url}?${params}`} alt="Street view" />
+      <img src={`${url}?${params}&key=${settings.google_maps.KEY}`} alt="Street View Image" />
     </div>
   );
 };

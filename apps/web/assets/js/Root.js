@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import settings from "./settings";
 import Map from "./Map";
 import Filter from "./Filter";
 
@@ -41,7 +42,7 @@ class Root extends Component {
         </div>
 
         <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDtTZTBMSoEnrum5YU9JszzbX-y6MemEWs"
+          googleMapURL={`${settings.google_maps.JS}&key=${settings.google_maps.KEY}`}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `100vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}
