@@ -5,6 +5,8 @@ import MultiSelect from "./MultiSelect";
 import Range from "./Range";
 import History from "./History";
 
+const HISTORY_KEY = "filter_history";
+
 const check = {
   rooms(nr_of_rooms, selected) {
     if (selected.length === 0) { return true; }
@@ -27,13 +29,14 @@ class Filter extends Component {
       rent: settings.rent.MAX,
       rooms: [],
       types: ["apartment", "new_construction"],
-      history: []
+      history: JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]")
     };
   }
 
   handleSubmit(apartments) {
     if (this.state.rent < settings.rent.MAX || this.state.rooms.length > 0) {
       const history = [{rent: this.state.rent, rooms: this.state.rooms}, ...this.state.history].slice(0, 3);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
       this.setState({history});
     }
 
