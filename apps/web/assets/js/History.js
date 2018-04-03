@@ -3,7 +3,6 @@ import formatter from "./formatter";
 import Icon from "./Icon";
 
 const handleClick = (event, item, props) => {
-  console.log(item);
   props.onClick(item);
   event.preventDefault();
 };
@@ -19,7 +18,7 @@ const History = (props) => {
           <Icon type="history" />
           {" "}
           <a href="#" onClick={e => handleClick(e, x, props)}>
-            Maxhyra: {formatter.rent(x.rent)}; Antal rum: {formatter.rooms(x.rooms)}
+            Maxhyra: {formatter.rent(x.rent)}; Antal rum: {formatter.rooms(x.rooms)}; {formatter.types(x.types || [], "; ")}
           </a>
         </span>
       ))}

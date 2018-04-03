@@ -21,6 +21,13 @@ const check = {
   }
 };
 
+const takeKeys = (object, keys) => {
+  return keys.reduce((acc, x) => {
+    acc[x] = object[x];
+    return acc;
+  }, {});
+};
+
 class Filter extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +42,7 @@ class Filter extends Component {
 
   handleSubmit(apartments) {
     if (this.state.rent < settings.rent.MAX || this.state.rooms.length > 0) {
-      const history = [{rent: this.state.rent, rooms: this.state.rooms}, ...this.state.history].slice(0, 3);
+      const history = [takeKeys(this.state, ["rent", "rooms", "types"]), ...this.state.history].slice(0, 3);
       localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
       this.setState({history});
     }
@@ -72,7 +79,7 @@ class Filter extends Component {
           label="Lägenhetstyp"
           options={Object.keys(settings.TYPES).map(value => ({value, text: settings.TYPES[value]}))}
           selected={this.state.types}
-          formatter={x => x.map(x => settings.TYPES[x]).join(", ")}
+          formatter={formatter.types}
           onChange={types => this.setState({types})}
         />
         <button className="show-result" onClick={() => this.handleSubmit(apartments)}>

@@ -49,6 +49,10 @@ const formatter = {
   type(value) {
     if (!settings.TYPES[value]) { return value; }
     return settings.TYPES[value];
+  },
+
+  types(types, separator = ", ") {
+    return types.map(x => settings.TYPES[x]).join(separator)
   }
 };
 
