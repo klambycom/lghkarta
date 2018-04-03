@@ -25,6 +25,16 @@ const settings = {
   google_maps: {
     JS: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
     KEY: "AIzaSyDtTZTBMSoEnrum5YU9JszzbX-y6MemEWs"
+  },
+
+  TYPES: {
+    apartment: "Lägenhet",
+    short_term: "Korttidskontrakt",
+    senior: "Seniorboende",
+    new_construction: "Nybyggt",
+    older_tenant: "Trygghetsboende",
+    youth_apartment: "Ungdomslägenhet",
+    student_housing: "Studentbostad"
   }
 };
 

@@ -39,6 +39,7 @@ const createApartment = x => {
 
   return {
     id: x.dataset.id,
+    type: x.dataset.type,
     longitude: +x.dataset.longitude,
     latitude: +x.dataset.latitude,
     city: x.dataset.city,

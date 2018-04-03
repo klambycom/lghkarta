@@ -44,6 +44,11 @@ const formatter = {
     }
 
     return text;
+  },
+
+  type(value) {
+    if (!settings.TYPES[value]) { return value; }
+    return settings.TYPES[value];
   }
 };
 

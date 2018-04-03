@@ -26,6 +26,7 @@ class Filter extends Component {
     this.state = {
       rent: settings.rent.MAX,
       rooms: [],
+      types: ["apartment", "new_construction"],
       history: []
     };
   }
@@ -42,7 +43,8 @@ class Filter extends Component {
   render() {
     const apartments = this.props.apartments
       .filter(x => check.rooms(+x.facts.rooms, this.state.rooms))
-      .filter(x => check.rent(+x.facts.rent, this.state.rent));
+      .filter(x => check.rent(+x.facts.rent, this.state.rent))
+      .filter(x => this.state.types.includes(x.type));
 
     return (
       <div className="Filter">
@@ -62,6 +64,13 @@ class Filter extends Component {
           selected={this.state.rooms}
           formatter={x => formatter.rooms(x, settings.rooms.MAX, settings.rooms.VALUES)}
           onChange={rooms => this.setState({rooms})}
+        />
+        <MultiSelect
+          label="Lägenhetstyp"
+          options={Object.keys(settings.TYPES).map(value => ({value, text: settings.TYPES[value]}))}
+          selected={this.state.types}
+          formatter={x => x.map(x => settings.TYPES[x]).join(", ")}
+          onChange={types => this.setState({types})}
         />
         <button className="show-result" onClick={() => this.handleSubmit(apartments)}>
           Se lägenheter <span>({apartments.length} st)</span>

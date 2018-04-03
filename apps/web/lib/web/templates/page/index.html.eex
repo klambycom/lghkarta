@@ -8,6 +8,7 @@
       <div
         class="apartment <%= if index >= 5 do %>older<% end %>"
         data-id="<%= apartment.id %>"
+        data-type="<%= apartment.type %>"
         data-longitude="<%= apartment.address.location.lng %>"
         data-latitude="<%= apartment.address.location.lat %>"
         data-city="<%= apartment.address.city %>"
