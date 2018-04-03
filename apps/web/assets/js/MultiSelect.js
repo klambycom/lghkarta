@@ -2,7 +2,7 @@ import React from "react";
 import Label from "./Label";
 
 const MultiSelect = (props) => {
-  const options = props.rooms.map(x => {
+  const options = props.options.map(x => {
     x.selected = props.selected.includes(x.value);
     return x;
   });

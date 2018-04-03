@@ -58,7 +58,7 @@ class Filter extends Component {
         />
         <MultiSelect
           label="Antal rum"
-          rooms={settings.rooms.VALUES}
+          options={settings.rooms.VALUES}
           selected={this.state.rooms}
           formatter={x => formatter.rooms(x, settings.rooms.MAX, settings.rooms.VALUES)}
           onChange={rooms => this.setState({rooms})}
