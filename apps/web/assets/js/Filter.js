@@ -7,6 +7,12 @@ import History from "./History";
 
 const HISTORY_KEY = "filter_history";
 
+const DEFAULT_FILTER = {
+  rent: settings.rent.MAX,
+  rooms: [],
+  types: ["apartment", "new_construction"],
+};
+
 const check = {
   rooms(nr_of_rooms, selected) {
     if (selected.length === 0) { return true; }
@@ -32,12 +38,8 @@ class Filter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      rent: settings.rent.MAX,
-      rooms: [],
-      types: ["apartment", "new_construction"],
-      history: JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]")
-    };
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+    this.state = Object.assign(DEFAULT_FILTER, {history}, (history[0] || {}));
   }
 
   handleSubmit(apartments) {
