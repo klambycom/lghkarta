@@ -15,7 +15,7 @@ defmodule Web.PageController do
     items =
       Crawler.sitemap("https://www.boplatssyd.se/lagenheter")
       |> Enum.filter(fn item -> not Enum.member?(ids, item.id) end)
-      #|> Enum.take(20)
+      |> Enum.take(50)
       |> Enum.map(&crawl_item/1)
       |> Enum.map(&create_apartment/1)
 
