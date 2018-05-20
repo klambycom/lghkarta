@@ -13,7 +13,7 @@ defmodule Web.PageController do
     ids = Apartment.all |> Enum.map(fn item -> item.id end)
 
     items =
-      Crawler.sitemap("https://www.boplatssyd.se/lagenheter")
+      Crawler.sitemap("https://www.boplatssyd.se/lagenheter?location[cities][]=11")
       |> Enum.filter(fn item -> not Enum.member?(ids, item.id) end)
       |> Enum.take(50)
       |> Enum.map(&crawl_item/1)
