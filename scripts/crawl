@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+function echo_error {
+	echo "$1" 1>$2
+	exit 1
+}
+
+if [ -z "$URL" ]; then
+	echo_error "Error! Url is required."
+fi
+
+if [ -z "$OUT_DIR" ]; then
+	echo_error "Error! Output directory is required."
+fi
+
+DATE=`date +%Y-%m-%d`
+
+# --silent hides the progress and error
+# --show-error shows the error message hidden by --silent
+# --fails returns an exit code > 0 when the request fails
+curl --silent --show-error --fail $URL >> "$OUT_DIR/$DATE.csv"

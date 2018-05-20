@@ -45,7 +45,8 @@ defmodule Web.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:crawler, in_umbrella: true},
-      {:apartment, in_umbrella: true}
+      {:apartment, in_umbrella: true},
+      {:poison, "~> 3.1"}
     ]
   end
 

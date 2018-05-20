@@ -21,7 +21,12 @@ defmodule Web.PageController do
 
     for item <- items, do: Apartment.save(item)
 
-    render conn, "fetch.html", items: items
+    output =
+      items
+      |> Enum.map(&Poison.encode!/1)
+      |> Enum.join("\n")
+
+    text conn, output
   end
   defp crawl_item(item) do
     # Google Maps Geolocation API only allows 50 requests per second. Add
