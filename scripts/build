@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+(cd apps/web/assets && ./node_modules/brunch/bin/brunch b -p)
+MIX_ENV=prod mix phx.digest
+MIX_ENV=prod mix release
