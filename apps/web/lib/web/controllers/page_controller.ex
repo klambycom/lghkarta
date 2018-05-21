@@ -21,13 +21,16 @@ defmodule Web.PageController do
 
     for item <- items, do: Apartment.save(item)
 
+    # Convert each apartment to JSON and add new line after each apartment
+    # instead of only between with Enum.join/1.
     output =
       items
       |> Enum.map(&Poison.encode!/1)
-      |> Enum.join("\n")
+      |> Enum.reduce("", fn(x, acc) -> acc <> x <> "\n" end)
 
     text conn, output
   end
+
   defp crawl_item(item) do
     # Google Maps Geolocation API only allows 50 requests per second. Add
     # a short sleep to not send too many requests.
