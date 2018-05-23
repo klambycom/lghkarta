@@ -20,8 +20,12 @@ defmodule Web.Router do
     get "/fetch", PageController, :fetch
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Web do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: Web.Schema,
+      interface: :simple,
+      context: %{pubsub: Web.Endpoint}
+  end
 end
