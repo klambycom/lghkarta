@@ -54,6 +54,11 @@ defmodule Web.Schema do
   end
 
   query do
+    field :apartment, non_null(:apartment) do
+      arg :id, non_null(:id)
+      resolve &Resolver.apartment/3
+    end
+
     field :all_apartments, non_null(list_of(non_null(:apartment))) do
       resolve &Resolver.all_apartments/3
     end
