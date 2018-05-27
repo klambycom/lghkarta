@@ -30,13 +30,19 @@ defmodule Filter do
   """
   def from_map(apartments, map), do: Enum.reduce(map, apartments, &filter/2)
 
+  defp filter({:max_rent, 0}, apartments), do: apartments
+
   defp filter({:max_rent, max_rent}, apartments),
     do: apartments
         |> Enum.filter(fn(%Apartment{facts: %Facts{rent: rent}}) -> rent <= max_rent end)
 
+  defp filter({:rooms, {[], _max}}, apartments), do: apartments
+
   defp filter({:rooms, {values, max}}, apartments),
     do: apartments
         |> Enum.filter(fn(%Apartment{facts: %Facts{rooms: rooms}}) -> rooms in values || (max in values and rooms > max) end)
+
+  defp filter({:types, []}, apartments), do: apartments
 
   defp filter({:types, types}, apartments),
     do: apartments

@@ -17,6 +17,10 @@ defmodule FilterTest do
     ]
   end
 
+  test "return all apartments if the rent is set to 0" do
+    assert Filter.from_map(all_apartments(), %{:max_rent => 0}) == all_apartments()
+  end
+
   test "find all apartments with the correct number of rooms" do
     assert Filter.from_map(all_apartments(), %{:rooms => {[2, 3], 8}}) == [
       %Apartment{
@@ -42,6 +46,10 @@ defmodule FilterTest do
     ]
   end
 
+  test "return all apartments if rooms is empty list" do
+    assert Filter.from_map(all_apartments(), %{:rooms => {[], 10}}) == all_apartments()
+  end
+
   test "find all apartments of selected types" do
     assert Filter.from_map(all_apartments(), %{:types => ["senior", "other"]}) == [
       %Apartment{
@@ -55,6 +63,10 @@ defmodule FilterTest do
         url: "https://www.boplatssyd.se/lagenhet/404441"
       }
     ]
+  end
+
+  test "return all apartments if types is empty list" do
+    assert Filter.from_map(all_apartments(), %{:types => []}) == all_apartments()
   end
 
   def all_apartments(),
