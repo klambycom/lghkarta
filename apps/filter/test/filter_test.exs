@@ -43,7 +43,7 @@ defmodule FilterTest do
   end
 
   test "find all apartments of selected types" do
-    assert Filter.from_map(all_apartments(), %{"type" => ["senior", "other"]}) == [
+    assert Filter.from_map(all_apartments(), %{"types" => ["senior", "other"]}) == [
       %Apartment{
         facts: %Apartment.Facts{area: 104, rent: 11563, rooms: 4},
         type: :senior,

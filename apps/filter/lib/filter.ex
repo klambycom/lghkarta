@@ -9,12 +9,12 @@ defmodule Filter do
 
   * `max_rent`, find all apartments cheaper than the max rent.
   * `rooms`, find all apartments with the correct number of rooms. Can also find all apartments with more than, or equal to, n rooms
-  * `type`, find all apartments of selected types.
+  * `types`, find all apartments of selected types.
 
   ## Example
 
       iex> all_apartments()
-      iex> |> Filter.from_map(%{"max_rent" => 15000, "rooms" => {[2, 4], 8}, "type" => ["apartment"]})
+      iex> |> Filter.from_map(%{"max_rent" => 15000, "rooms" => {[2, 4], 8}, "types" => ["apartment"]})
       [
         %Apartment{
           facts: %Apartment.Facts{area: 86, rent: 9149, rooms: 4},
@@ -38,7 +38,7 @@ defmodule Filter do
     do: apartments
         |> Enum.filter(fn(%Apartment{facts: %Facts{rooms: rooms}}) -> rooms in values || (max in values and rooms > max) end)
 
-  defp filter({"type", types}, apartments),
+  defp filter({"types", types}, apartments),
     do: apartments
         |> Enum.filter(fn(%Apartment{type: type}) -> Atom.to_string(type) in types end)
 end
