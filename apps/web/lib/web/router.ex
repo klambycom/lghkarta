@@ -10,6 +10,7 @@ defmodule Web.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: ~r/https?:\/\/(localhost|(\w+\.)?lghkarta\.se)(:[0-9]{1,4})?$/
     plug :accepts, ["json"]
   end
 

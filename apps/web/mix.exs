@@ -47,7 +47,8 @@ defmodule Web.Mixfile do
       {:crawler, in_umbrella: true},
       {:apartment, in_umbrella: true},
       {:poison, "~> 3.1"},
-      {:absinthe_plug, "~> 1.4.4"}
+      {:absinthe_plug, "~> 1.4.4"},
+      {:cors_plug, "~> 1.5"}
     ]
   end
 
