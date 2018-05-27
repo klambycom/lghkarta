@@ -14,7 +14,7 @@ defmodule Filter do
   ## Example
 
       iex> all_apartments()
-      iex> |> Filter.from_map(%{"max_rent" => 15000, "rooms" => {[2, 4], 8}, "type" => [:apartment]})
+      iex> |> Filter.from_map(%{"max_rent" => 15000, "rooms" => {[2, 4], 8}, "type" => ["apartment"]})
       [
         %Apartment{
           facts: %Apartment.Facts{area: 86, rent: 9149, rooms: 4},
@@ -40,5 +40,5 @@ defmodule Filter do
 
   defp filter({"type", types}, apartments),
     do: apartments
-        |> Enum.filter(fn(%Apartment{type: type}) -> type in types end)
+        |> Enum.filter(fn(%Apartment{type: type}) -> Atom.to_string(type) in types end)
 end
