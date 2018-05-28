@@ -4,6 +4,11 @@ defmodule Web.Schema do
 
   import_types Absinthe.Type.Custom
 
+  object :result do
+    field :nr_of_items, non_null(:integer)
+    field :items, non_null(list_of(:apartment))
+  end
+
   object :apartment do
     field :id, non_null(:id)
     field :url, non_null(:string)
@@ -57,6 +62,15 @@ defmodule Web.Schema do
     field :apartment, non_null(:apartment) do
       arg :id, non_null(:id)
       resolve &Resolver.apartment/3
+    end
+
+    field :filter, non_null(:result) do
+      arg :max_rent, :integer
+      arg :rooms, list_of(:integer)
+      arg :max_rooms, :integer
+      arg :types, list_of(:string)
+
+      resolve &Resolver.filter/3
     end
 
     field :all_apartments, non_null(list_of(non_null(:apartment))) do
