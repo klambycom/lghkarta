@@ -72,9 +72,5 @@ defmodule Web.Schema do
 
       resolve &Resolver.filter/3
     end
-
-    field :all_apartments, non_null(list_of(non_null(:apartment))) do
-      resolve &Resolver.all_apartments/3
-    end
   end
 end
